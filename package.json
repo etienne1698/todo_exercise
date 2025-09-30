@@ -1,0 +1,30 @@
+{
+  "name": "todos_api",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "tsx src/index.ts",
+    "migrate": "drizzle-kit generate && drizzle-kit migrate",
+    "migrate:only": "drizzle-kit migrate",
+    "studio": "drizzle-kit studio"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.8",
+    "@hono/swagger-ui": "^0.5.1",
+    "@hono/zod-validator": "^0.4.3",
+    "@scalar/hono-api-reference": "^0.7.1",
+    "better-sqlite3": "^12.4.1",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.40.0",
+    "drizzle-zod": "^0.7.0",
+    "hono": "^4.7.4",
+    "hono-openapi": "^0.4.6",
+    "zod": "^3.24.2",
+    "zod-openapi": "^4.2.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^20.11.17",
+    "tsx": "^4.7.1"
+  }
+}
