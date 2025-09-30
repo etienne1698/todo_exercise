@@ -1,4 +1,4 @@
-import { db } from "~/shared/infrastructure/database";
+import { db } from "~/shared/infrastructure/sql/database";
 import type { TodoRepository } from "../domain/todo.repository";
 import { TodoEntity, type TodoEntityProps } from "../domain/todo.entity";
 
