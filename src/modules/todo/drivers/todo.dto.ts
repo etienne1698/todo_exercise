@@ -5,6 +5,7 @@ export const todoDto = z.object({
   title: z.string(),
   description: z.string(),
   dueDate: z.string(),
+  completed: z.boolean({coerce: true}),
 });
 
 export const allTodoDto = {

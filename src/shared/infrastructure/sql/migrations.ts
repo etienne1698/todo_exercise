@@ -9,6 +9,12 @@ export const migrations: { name: string; up: (db: Database) => void }[] = [
       );
     },
   },
+  {
+    name: "add_completed_column_to_todos_table",
+    up: (db: Database) => {
+      db.exec("ALTER TABLE todos ADD COLUMN completed INTEGER DEFAULT 0");
+    },
+  },
 ];
 
 export const migrate = async (db: Database) => {
@@ -24,5 +30,7 @@ export const migrate = async (db: Database) => {
     if (migrationExists) continue;
 
     migration.up(db);
+    
+    db.prepare("INSERT INTO migrations (name) VALUES (?)").run(migration.name);
   }
 };

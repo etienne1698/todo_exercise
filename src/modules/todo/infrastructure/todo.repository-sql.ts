@@ -13,22 +13,22 @@ export class TodoRepositorySql implements TodoRepository {
     return new TodoEntity(result as TodoEntityProps);
   }
 
-  async create(todo: Omit<TodoEntityProps, "id">): Promise<TodoEntity["id"]> {
+  async create(todo: TodoEntity): Promise<TodoEntity["id"]> {
     const result = db
       .prepare(
-        "INSERT INTO todos (title, description, dueDate) VALUES (?, ?, ?)"
+        "INSERT INTO todos (title, description, dueDate, completed) VALUES (?, ?, ?, ?)"
       )
-      .run(todo.title, todo.description, todo.dueDate);
+      .run(todo.title, todo.description, todo.dueDate.toISOString(), +todo.completed);
     return result.lastInsertRowid as number;
   }
 
   async update(
     id: TodoEntity["id"],
-    todo: Omit<TodoEntityProps, "id">
+    todo: TodoEntity
   ): Promise<TodoEntity["id"]> {
     db.prepare(
-      "UPDATE todos SET title = ?, description = ?, dueDate = ? WHERE id = ?"
-    ).run(todo.title, todo.description, todo.dueDate, id);
+      "UPDATE todos SET title = ?, description = ?, dueDate = ?, completed = ? WHERE id = ?"
+    ).run(todo.title, todo.description, todo.dueDate.toISOString(), +todo.completed, id);
     return id;
   }
 
