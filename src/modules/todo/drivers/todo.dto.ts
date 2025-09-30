@@ -1,12 +1,16 @@
 import z from "zod";
 
-export const todoDto = z.object({
-  id: z.number(),
-  title: z.string(),
-  description: z.string(),
-  dueDate: z.string(),
-  completed: z.boolean({coerce: true}),
-});
+export const todoDto = z
+  .object({
+    id: z.number(),
+    title: z.string(),
+    description: z.string(),
+    dueDate: z.string(),
+    completed: z.boolean({ coerce: true }),
+  })
+  .openapi({
+    ref: "Todo",
+  });
 
 export const allTodoDto = {
   response: z.array(todoDto),
